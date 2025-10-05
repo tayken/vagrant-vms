@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "cloud-image/ubuntu-24.04"
+  config.vm.hostname = "foundry"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.network "forwarded_port", guest: 30000, host: 30000
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "4"
+    vb.memory = "8192"
+  end
+  config.vm.provision "shell", path: "provision.sh", args: "#{ENV['FOUNDRY_URL']}"
+end
