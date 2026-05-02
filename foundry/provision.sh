@@ -3,8 +3,9 @@ set -eu
 
 wget -O foundryvtt.zip ${1}
 apt update
+apt full-upgrade
 apt install -y libssl-dev unzip
-curl -sL https://deb.nodesource.com/setup_22.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 apt install -y nodejs
 npm install pm2 -g
 sudo -u vagrant mkdir /home/vagrant/foundryvtt
