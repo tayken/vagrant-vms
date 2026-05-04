@@ -1,0 +1,13 @@
+---
+- name: Provision Vagrant VM
+  hosts: all
+  tasks:
+    - name: Update repositories and full upgrade
+      ansible.builtin.apt:
+        upgrade: full
+        update_cache: true
+
+    - name: Change user shell to bash
+      ansible.builtin.user:
+        name: vagrant
+        shell: /bin/bash
