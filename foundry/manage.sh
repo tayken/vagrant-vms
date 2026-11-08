@@ -8,6 +8,18 @@ manage_foundry () {
     ssh -F ssh-config vagrant@default pm2 ${1} foundry
 }
 
+update_foundry () {
+    get_ssh_config
+    manage_foundry stop
+
+    ssh -F ssh-config vagrant@default wget -qO foundryvtt.zip ${1}
+    ssh -F ssh-config vagrant@default unzip -qo foundryvtt.zip -d /home/vagrant/foundryvtt
+    ssh -F ssh-config vagrant@default rm foundryvtt.zip
+
+    manage_foundry start
+    rm ssh-config
+}
+
 backup_data () {
     get_ssh_config
     mkdir -p backup/Data
